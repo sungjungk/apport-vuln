@@ -9,7 +9,6 @@ After the creation of ‘.crash’ file, apport daemon (a.k.a. whoopsie) extract
 Lastly, the whoopsie forwards the data to a remotely connected Ubuntu Error Report system.
   
 ## Vulnerability
-I have found an integer overflow vulnerability during data conversion from text in .crash to bson data format with an arbitrary .crash file. 
 In .crash file, the contents are stored in a key-value format as follows:
 ```
 ProblemType: Crash
@@ -19,9 +18,9 @@ ProcMaps:
  556ffb85a000-556ffb866000 r-xp 00000000 08:01 404793 …
 ...
 ```
-After finding .crash file, whoopsie separately measures the length of ‘key’ and ‘value’.
+whoopsie daemon separately measures the length of ‘key’ and ‘value’ in .crash file after finding .crash file. 
 The summation of the length of ‘key’, ‘value’, and additional bytes is assigned to ‘bytesNeeded’ variable. 
-whoopsie attempts to allocate memory region according to the ‘bytesNeeded’.
+The daemon attempts to allocate memory region according to the ‘bytesNeeded’.
 An integer overflow can happen on a ‘bytesNeeded’ when the following requirements are met.
   - length of ‘value’ in .crash file => 0 < {length of ‘value’} < 1024
   - length of ‘key’ in .crash file => UINT32_MAX - {length of ‘value’} - 7 < {length of ‘key’} < UINT32_MAX
