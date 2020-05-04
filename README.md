@@ -53,5 +53,5 @@ AAA … AA : B
 [![Video Label](https://img.youtube.com/vi/OgIuHWeBQnU/0.jpg)](https://youtu.be/OgIuHWeBQnU)
 
 ## Disclosure Timeline
-2020-04-22: Public release of security advisory.
+2020-04-22: Public release of security advisory.  
 2020-04-23: CVE-2020-12135 has been assigned.
